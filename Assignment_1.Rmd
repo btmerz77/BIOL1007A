@@ -48,18 +48,21 @@ output:
     + Pull
       + Brings GitHub repo to local computer
 2. Branches
-i.	Main branch
-1.	ABC -> A’BC -> A’XCD
-ii.	Tracking history and changes
-c.	Loop of changing files and committing changes
-i.	git status
-ii.	git add -A
-iii.	git commit -am “note”
-iv.	git push
-IV.	R Project
-a.	Divides work into multiple context
-i.	Have their own working directory
-ii.	Workspace
-iii.	History
-iv.	Source document
+    + Main branch
+      + ABC -> A’BC -> A’XCD
+    + Tracking history and changes
+3. Loop of changing files and committing changes  
+    + git status
+    + git add -A
+    + git commit -am “note”
+    + git push
+
+
+## R Project
+1. Divides work into multiple context
+    + Have their own working directory
+    + Workspace
+    + History
+    + Source document
+    
 
