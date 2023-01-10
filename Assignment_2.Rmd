@@ -1,0 +1,55 @@
+---
+title: "Assignment 2"
+author: "Ben Merz"
+date: "2023-01-10"
+output:
+    prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+---
+
+1. image: ![](/Users/BenM/Pictures/2023_roster.png)
+
+2. 3 x 5 table
+  
+  First Header  | Second Header | Third header
+  ------------- | ------------- | ------------
+  Content Cell  | Content Cell  | content Cell
+  Content Cell  | Content Cell  | content Cell
+  Content Cell  | Content Cell  | content Cell
+  Content Cell  | Content Cell  | content Cell
+
+3. *Cool beans* are the best. But the **cooler beans** are better. Therefore, we must strive to be the "the coolest of beans"
+
+4. bulleted list
+    + Changes to files
+      + Adding new file
+      + Altering existing files
+      + Delete existing files
+    + Commit (noun)
+      + Snapshot of the current file system
+    + To commit (verb)
+      + saving and recording your changes to local repository
+    + Push
+      + Transferring changes from local repo to GitHub
+    + Pull
+      + Brings GitHub repo to local computer
+      
+5. numbered list, look left
+
+6. [Cool beans](http://www.coolbeansbar.com/)
+
+7. Headers 
+
+# biggest header 
+
+## smaller header 
+
+### even smaller header 
+
+8. A superscipt^3^ and
+   a subscript~3~!
+
+9. $$\alpha = \frac{\beta}{\delta + \gamma_x}$$
+
+10. `ben`
