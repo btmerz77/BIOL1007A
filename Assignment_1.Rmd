@@ -1,0 +1,65 @@
+---
+title: "Assignment 1"
+author: "Ben Merz"
+date: "2023-01-10"
+output: 
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+---
+
+
+## Git and GitHub
+1. Git
+    + Local computer
+2. GitHub
+    + Free remote website for public storage of projects
+3. Version control
+    + Keep (and restoring) past versions of files
+4. History
+    + Initially for programmers collaborating
+
+## Files for version control
+1. Best
+    + Plain text (.txt)
+    + .R scripts
+    + Markdown (.md/.Rmd)
+      + text formatting language
+      + Markup language
+    + HTML
+    + Latex
+2. Not good
+    + PDFs
+    + Videos/pics
+    + Word doc
+    
+## Work process
+1. GitHub repo ---> clone ----> local computer
+    + Changes to files
+      + Adding new file
+      + Altering existing files
+      + Delete existing files
+    + Commit (noun)
+      + Snapshot of the current file system
+    + To commit (verb)
+      + saving and recording your changes to local repository
+    + Push
+      + Transferring changes from local repo to GitHub
+    + Pull
+      + Brings GitHub repo to local computer
+2. Branches
+i.	Main branch
+1.	ABC -> A’BC -> A’XCD
+ii.	Tracking history and changes
+c.	Loop of changing files and committing changes
+i.	git status
+ii.	git add -A
+iii.	git commit -am “note”
+iv.	git push
+IV.	R Project
+a.	Divides work into multiple context
+i.	Have their own working directory
+ii.	Workspace
+iii.	History
+iv.	Source document
+
