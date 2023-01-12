@@ -1,0 +1,66 @@
+---
+title: "Assignment 3"
+author: "Ben Merz"
+date: "2023-01-12"
+output: html_document
+---
+
+### Question 1
+
+```{r}
+x <- 1.1
+a <- 2.2
+b <- 3.3
+
+z <- x^a^b
+print(z)
+
+z <- (x^a)^b
+print(z)
+
+z <- 3*x^3 + 2*x^2 + 1
+print(z)
+```
+
+### Question 2
+```{r}
+c(seq(1, 8, 1), seq(7, 1, -1))
+
+rep(1:5, c(1:5))
+
+rep(5:1, c(1:5))
+```
+
+### Question 3
+```{r}
+queue <- c("sheep", "fox", "owl", "ant") #queue represents the animals that are lined up to enter an exclusive club
+#the serpent arrives and gets in the back of the line;
+print(queue)
+
+queue <- c(queue, "serpent")
+print(queue)
+
+#the sheep enters the club (so disappears from the line);
+queue <- queue[2:5]
+print(queue)
+
+#the donkey arrives and talks his way to the front of the line;
+queue <- c("donkey", queue)
+print(queue)
+
+#the serpent gets impatient and leaves;
+queue <- queue[1:4]
+print(queue)
+
+#the aphid arrives and the ant invites him to cut in line (hint: check out the append function).
+queue <- append(queue, "aphid", after=3)
+print(queue)
+
+#finally, determine the position of the aphid in the line (hint: use the which function).
+print(which(queue == "aphid"))
+
+```
+
+
+
+
