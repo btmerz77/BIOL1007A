@@ -1,0 +1,134 @@
+---
+title: "Weekly 1"
+author: "Ben Merz"
+date: "2023-01-16"
+output: 
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+---
+
+# How to set up a GitHub web page in RStudio, a quick guide
+
+### Installing R and RStudio
+
+  * Installing R is pretty easy
+    + Go to [cran.r-project.org/mirrors.html](https://cran.r-project.org/mirrors.html) and pick the correct mirror
+      + They are organized by lanugage and then school
+    + Pick a mirror and then pick the correct R dowload for your system 
+    
+    
+  * Installing RStudio is also pretty simple!!!
+    + Go to [https://posit.co/](https://posit.co/) and select the dowload RStudio in the top left hand corner
+      + Note that RStudio has now been named posit so as to incorporate more programmers into using its IDE
+    + Select the version for your operating system
+      + Dowload and install
+      
+### Dowloading and Installing Git
+
+  * Installing Git can be slightly more complicated
+    + For Windows users
+      + Proceed to [https://git-scm.com/download/win](https://git-scm.com/download/win)
+      + Dowload the correct version based on your system requirements
+    + For Mac users
+      + Proceed to [https://brew.sh/](https://brew.sh/)
+      + Copy the code at the top of the page
+        + `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+      + Open terminal and paste this code exactly into it
+        + Follow the prompts
+      + Once homebrew is installed, run `brew install git`
+    + Once git is installed, restart RStudio
+  * Trouble Shooting
+    + For Mac users
+      + Only the command lines from XCode should be needed to install homebrew
+        + The Homebrew install process should autmatically download what it needs
+        + However, during the install processes, errors can be thrown
+        + If this is the case, download XCode from the app store, this should solve the issue
+      + If running into further errors installing git, git can be installed via an installer
+        + XCode will need to be first installed via the AppStore
+        + Proceed to this [link](https://sourceforge.net/projects/git-osx-installer/) to dowload the latest installer
+        + After git is installed, XCodes user agreement needs to be approved
+          + This can be done by either opening XCode from the desktop or via terminal in RStudio
+        
+### Creating a GitHub Account and Repository
+  * Create a GitHub account
+    + Go to [https://github.com/](https://github.com/) and select create an account
+      + Follow the prompts
+    + Then create a personal access token (this will be needed later to link your GitHub to RStudio)
+      + Go to Developer settings
+        + Personal access tokens
+          + Generate “classic” token (name the token as you wish and pick a desired expiration date)
+            + Gheck the “repo” box
+              + Generate token
+              + **Copy and paste token and save somewhere. You will not be able to see this code again**
+      + Go to RStudio and run the following code in Console
+        + `install.packages(“credentials”)`
+          + follow prompts to install package
+        + `git config –global user.email “put github email here” git config –global user.name “put your name here” credentials::set_github_pat(“put PAT here”)`
+          + Run the next piece of code with your exact GitHub user name and then personal access token (PAT)
+  * Create a new repository
+    + Go to your home page and  click the “+”
+      + Name the repository as desired
+    + Include a
+      + READme file
+      + select MIT licence
+      + Do not include gitignore
+        + RStudio will generate this for us
+
+### Linking R Project to GitHub and Hosting your Website
+  * First in RStudio
+    + In the very most top right corner, click on the dropdown and select New Project
+    + Click “version control” and select “git”
+      + If git is installed correctly, a check box should appear on this page
+    + A box should appear asking for a URL
+  * Then in your GitHub repository
+    + Click on the green `CODE` button
+    + Copy the URL
+  * Back to RStudio
+    + Paste the URl from GitHub into the prompted box
+    + Name the repo the same as its named on GitHub
+      + If not named exactly, problems will occur
+    + Save this project to any location on computer
+      + Note, do not save in downloads folder
+    + Click `Create Project`
+  * Back to GitHub
+    + Go to your repoitory's settings
+    + Go to pages select source
+    + Change the selection from none to main branch
+
+### Committing Changes to your Website
+  * Now all wee need to do is create your page and update your GitHub
+  * In RStudio
+    + Create a new R markdown file title anything you want
+    + Save the file as `index`
+      + Important, must be a lower case i
+    + Knit to html and save
+  + Committing changes to GitHub
+    + In RStudio, select the **terminal** and type the following commands in
+      + `git status`
+        + Checks the current status and see what is up to date with GitHub and not
+      + `git add -A`
+        + Add any changes to be submitted
+      + `git commit -am ‘desired commit message’`
+        + Adds a message for the commit
+      + `git commit`
+        + Commits the changes
+      + `git push`
+        + Pushs the changes up to GitHub
+      + Note
+        + Git status should be entered in between steps to make sure everything is proceeding
+         ![](/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/GitD.jpeg) 
+  + Give it a few minutes than go to the link under your pages in setting
+    + Your website should be live here, HOOOOORRRRAAAAYYYY!
+
+### General Trouble Shooting
+  * File size
+    + Some files in the intall process are large
+    + Make sure you have ample bandwidth and are not trying to install these larger items with multiple people at the same time, in the same space
+  * GitHub hosting
+    + It takes time for your GitHub webpage to live. Give it time.
+      
+      
+      
+      
+  

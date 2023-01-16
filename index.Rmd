@@ -8,10 +8,14 @@ output:
     highlight: github
 ---
 
-## Assignments
+## Daily Assignments
 
-[Assignment 1](Assignment_1.html)
+[Daily 1](Assignment_1.html)
 
-[Assignment 2](Assignment_2.html)
+[Daily 2](Assignment_2.html)
 
-[Assignment 3](Assignment_3.html)
+[Daily 3](Assignment_3.html)
+
+## Weekly Assignments
+
+[Weekly 1](Weekly_1.html)

@@ -2,7 +2,10 @@
 title: "Assignment 3"
 author: "Ben Merz"
 date: "2023-01-12"
-output: html_document
+output:
+    prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
 ---
 
 ### Question 1
