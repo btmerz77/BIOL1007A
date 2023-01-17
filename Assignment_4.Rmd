@@ -1,0 +1,60 @@
+---
+title: "Assignment 4"
+author: "Ben Merz"
+date: "2023-01-17"
+output: 
+ prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+---
+
+# Working with matrices, lists, and data frames
+
+1. Assign to the variable n_dims a single random integer between 3 and 10.
+  + Create a vector of consecutive integers from 1 to n_dims2.
+  
+```{r}
+set.seed(100)
+n_dims = sample(3:10, 1)
+myVec = c(1:(n_dims)^2)
+print(myVec)
+```
+  + Use the sample function to randomly reshuffle these values.
+```{r}
+rVec <- sample(myVec)
+print(rVec)
+```
+  + create a square matrix with these elements.
+```{r}
+mMat <- matrix(data=rVec, nrow=n_dims, ncol=n_dims)
+print(mMat)
+```
+  + find a function in r to transpose the matrix.
+```{r}
+tmMat <- t(mMat)
+print(tmMat)
+```
+  + calculate the sum and the mean of the elements in the first row and then the last row.
+```{r}
+# first row
+mean(tmMat[1,])
+sum(tmMat[1,])
+
+# last row
+mean(tmMat[n_dims,])
+sum(tmMat[n_dims,])
+```
+2. Create a list with the following named elements:
+```{r}
+my_matrix = matrix(data = runif(16), nrow = 4, ncol = 4)
+
+```
+
+
+
+
+
+
+
+
+
