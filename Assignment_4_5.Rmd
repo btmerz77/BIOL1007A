@@ -1,5 +1,5 @@
 ---
-title: "Assignment 4"
+title: "Assignment 4 and 5"
 author: "Ben Merz"
 date: "2023-01-17"
 output: 
@@ -81,12 +81,12 @@ print(dFrame1)
   + call the first column/variable my_unifs and fill it with 26 random uniform values from 0 to 10
   + call the second variable my_letters and fill it with 26 capital letters in random order.
 ```{r}
+set.seed(1000)
 colnames(dFrame1) <- c("my_unifs", "my_letters")
-print(dFrame1)
 
-my_unifs <- runif(26, 0, 10)
-my_letters3 <- sample(LETTERS[1:26])
-dFrame2 <- data.frame(my_unifs, my_letters3)
+dFrame1$my_unifs <- runif(26, 0, 10)
+dFrame1$my_letters <- sample(letters[1:26])
+print(dFrame1)
 ```
   + for the first variable, use a single line of code in R to select 4 random rows and replace the numerical values in those rows with NA.
 ```{r}

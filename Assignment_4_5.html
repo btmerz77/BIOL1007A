@@ -14,7 +14,7 @@
 
 <meta name="date" content="2023-01-17" />
 
-<title>Assignment 4</title>
+<title>Assignment 4 and 5</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -148,7 +148,7 @@ code span.ot { color: #007020; }
 
 
 <section class="page-header">
-<h1 class="title toc-ignore project-name">Assignment 4</h1>
+<h1 class="title toc-ignore project-name">Assignment 4 and 5</h1>
 <h4 class="author project-author">Ben Merz</h4>
 <h4 class="date project-date">2023-01-17</h4>
 </section>
@@ -320,38 +320,39 @@ uniform values from 0 to 10</li>
 <li>call the second variable my_letters and fill it with 26 capital
 letters in random order.</li>
 </ul>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dFrame1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;my_unifs&quot;</span>, <span class="st">&quot;my_letters&quot;</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dFrame1)</span></code></pre></div>
-<pre><code>##    my_unifs my_letters
-## 1         0          0
-## 2         0          0
-## 3         0          0
-## 4         0          0
-## 5         0          0
-## 6         0          0
-## 7         0          0
-## 8         0          0
-## 9         0          0
-## 10        0          0
-## 11        0          0
-## 12        0          0
-## 13        0          0
-## 14        0          0
-## 15        0          0
-## 16        0          0
-## 17        0          0
-## 18        0          0
-## 19        0          0
-## 20        0          0
-## 21        0          0
-## 22        0          0
-## 23        0          0
-## 24        0          0
-## 25        0          0
-## 26        0          0</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>my_unifs <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">26</span>, <span class="dv">0</span>, <span class="dv">10</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>my_letters3 <span class="ot">&lt;-</span> <span class="fu">sample</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>])</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>dFrame2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(my_unifs, my_letters3)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1000</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dFrame1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;my_unifs&quot;</span>, <span class="st">&quot;my_letters&quot;</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>dFrame1<span class="sc">$</span>my_unifs <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">26</span>, <span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>dFrame1<span class="sc">$</span>my_letters <span class="ot">&lt;-</span> <span class="fu">sample</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>])</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dFrame1)</span></code></pre></div>
+<pre><code>##     my_unifs my_letters
+## 1  3.2787871          p
+## 2  7.5884649          j
+## 3  1.1393640          i
+## 4  6.9075515          g
+## 5  5.1640240          l
+## 6  0.6773796          q
+## 7  7.3871486          h
+## 8  5.8353505          s
+## 9  2.1577140          c
+## 10 2.5612240          f
+## 11 3.4993746          w
+## 12 7.5546158          m
+## 13 3.1708425          u
+## 14 8.6581282          n
+## 15 7.6416075          z
+## 16 0.7288487          t
+## 17 4.9261774          r
+## 18 6.3516203          e
+## 19 0.8485787          b
+## 20 5.8392103          x
+## 21 1.6294456          o
+## 22 8.0494934          k
+## 23 2.8962222          d
+## 24 0.7177347          a
+## 25 5.4830544          y
+## 26 6.7655327          v</code></pre>
 <ul>
 <li><p>for the first variable, use a single line of code in R to select
 4 random rows and replace the numerical values in those rows with
