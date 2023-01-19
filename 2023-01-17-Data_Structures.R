@@ -206,3 +206,5 @@ m[complete.cases(m[,c(1:2)]),] # only looking in first two columns
 
 
 
+
+

@@ -50,11 +50,8 @@ sum(tmMat[n_dims,])
   + `my_letters`, which is a 26-element vector of all the lower-case letters in random order.
 ```{r}
 set.seed(1000)
-my_matrix <- matrix(data = runif(16), nrow = 4, ncol = 4)
-my_logical <- (runif(100, 0, 10)) > 5
-my_letters <- sample(letters[1:26])
 
-my_list <- list(my_matrix, my_logical, my_letters)
+my_list <- list(my_matrix = matrix(data = runif(16), nrow = 4, ncol = 4), my_logical = (runif(100, 0, 10)) > 5, my_letters = sample(letters[1:26]))
 print(my_list)
 ```
   + create a new list, which has the element[2,2] from the matrix, the second element of the logical vector, and the second element of the letters vector.
@@ -62,15 +59,13 @@ print(my_list)
   + combine the underlying elements from the new list into a single atomic vector with the c() function.
   + what is the data type of this vector?
 ```{r}
-my_matrix2 <- my_matrix[2,2]
-my_logical2 <- my_logical[2]
-my_letters2 <- my_letters[2]
 
-my_list2 <- list(my_matrix2, my_logical2, my_letters2)
+my_list2 <- list(my_list$my_matrix[2,2], my_list$my_logical[2], my_list$my_letters[2])
 print(my_list2)
 str(my_list2)
 
-a_vec <- c(my_matrix2, my_logical2, my_letters2)
+a_vec <- unlist(my_list2)
+print(a_vec)
 typeof(a_vec)
 ```
 ### 3. Create an empty data frame with two variables (= columns) and 26 observations (= rows) below:
@@ -85,25 +80,31 @@ set.seed(1000)
 colnames(dFrame1) <- c("my_unifs", "my_letters")
 
 dFrame1$my_unifs <- runif(26, 0, 10)
-dFrame1$my_letters <- sample(letters[1:26])
+dFrame1$my_letters <- sample(LETTERS[1:26])
 print(dFrame1)
 ```
   + for the first variable, use a single line of code in R to select 4 random rows and replace the numerical values in those rows with NA.
 ```{r}
-
+set.seed(1000)
+dFrame1$my_unifs[sample(1:26, 4)] <- NA
+print(dFrame1)
 ```
   + for the first variable, write a single line of R code to identify which rows have the missing values.
 re-order the entire data frame to arrange the second variable in alphabetical order.
 ```{r}
+which(is.na(dFrame1$my_unifs))
 
+dFrame1 <- dFrame1[order(dFrame1$my_letters),]
+print(dFrame1)
 ```
   + calculate the column mean for the first variable.
 ```{r}
-
+mean(dFrame1$my_unifs, na.rm=T)
 ```
   + rename the second column ‘my_LETTERS’
 ```{r}
-
+colnames(dFrame1) <- c("my_unifs", "my_LETTERS")
+print(dFrame1)
 ```
 
 
