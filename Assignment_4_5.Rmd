@@ -103,14 +103,6 @@ mean(dFrame1$my_unifs, na.rm=T)
 ```
   + rename the second column ‘my_LETTERS’
 ```{r}
-colnames(dFrame1) <- c("my_unifs", "my_LETTERS")
+colnames(dFrame1)[2] <- "my_LETTERS"
 print(dFrame1)
 ```
-
-
-
-
-
-
-
-

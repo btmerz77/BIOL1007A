@@ -12,9 +12,9 @@
 
 <meta name="author" content="Ben Merz" />
 
-<meta name="date" content="2023-01-10" />
+<meta name="date" content="2023-01-19" />
 
-<title>BIOL 1007A Web Page</title>
+<title>Weekly 2</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -31,6 +31,97 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </script>
 
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+
+a.sourceLine {
+pointer-events: auto;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -57,26 +148,147 @@ code span.ot { color: #007020; }
 
 
 <section class="page-header">
-<h1 class="title toc-ignore project-name">BIOL 1007A Web Page</h1>
+<h1 class="title toc-ignore project-name">Weekly 2</h1>
 <h4 class="author project-author">Ben Merz</h4>
-<h4 class="date project-date">2023-01-10</h4>
+<h4 class="date project-date">2023-01-19</h4>
 </section>
 
 
 
 <section class="main-content">
-<div id="daily-assignments" class="section level2">
-<h2>Daily Assignments</h2>
-<p><a href="Assignment_1.html">Daily 1</a></p>
-<p><a href="Assignment_2.html">Daily 2</a></p>
-<p><a href="Assignment_3.html">Daily 3</a></p>
-<p><a href="Assignment_4_5.html">Daily 4 and 5</a></p>
-</div>
-<div id="weekly-assignments" class="section level2">
-<h2>Weekly Assignments</h2>
-<p><a href="Weekly_1.html">Weekly 1</a></p>
-<p><a href="Weekly_2.html">Weekly2</a></p>
-</div>
+<ol style="list-style-type: decimal">
+<li>Create a function that returns a data frame with 2 columns (named
+“Type” and “Value”) and 50 rows/observations.
+<ul>
+<li>The first column should have “Control” as the first 25 observations
+and “Treatment” as the second half of observations.</li>
+<li>The second column should have the first 25 values as random and
+normally distributed with a mean of 10 and standard deviation of 1.5.
+The next 25 values of the second column should be random and normally
+distributed with a mean of 45 and standard deviation of 2.</li>
+<li>You can do this all as a single line of code in the function or by
+breaking it up into multiple code blocks.</li>
+</ul></li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># two different means and two different SD</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1000</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Function: dataFCT</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates a simulated two column data frame where the values means can be chosen</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># input: </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ouput: </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------------</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>dataFCT <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">m1 =</span> <span class="dv">10</span>, <span class="at">sd1 =</span> <span class="fl">1.5</span>, <span class="at">m2 =</span> <span class="dv">45</span>, <span class="at">sd2 =</span> <span class="dv">2</span>){</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  dFrame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Type =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Treatment&quot;</span>), <span class="at">each =</span> <span class="dv">25</span>),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">Value =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">25</span>, m1, sd1), <span class="fu">rnorm</span>(<span class="dv">25</span>, m2, sd2))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(dFrame)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">dataFCT</span>()</span></code></pre></div>
+<pre><code>##         Type     Value
+## 1    Control  9.331333
+## 2    Control  8.191215
+## 3    Control 10.061689
+## 4    Control 10.959083
+## 5    Control  8.820168
+## 6    Control  9.421766
+## 7    Control  9.286198
+## 8    Control 11.079626
+## 9    Control  9.972242
+## 10   Control  7.940323
+## 11   Control  8.526358
+## 12   Control  9.168267
+## 13   Control 10.182072
+## 14   Control  9.818692
+## 15   Control  7.995938
+## 16   Control 10.255086
+## 17   Control 10.232618
+## 18   Control 10.037398
+## 19   Control  6.930122
+## 20   Control 10.319731
+## 21   Control 14.005107
+## 22   Control  8.159476
+## 23   Control 11.251371
+## 24   Control 10.798858
+## 25   Control  9.029763
+## 26 Treatment 46.206323
+## 27 Treatment 41.432312
+## 28 Treatment 45.669884
+## 29 Treatment 46.121951
+## 30 Treatment 47.441871
+## 31 Treatment 44.577093
+## 32 Treatment 46.398859
+## 33 Treatment 43.587127
+## 34 Treatment 44.069698
+## 35 Treatment 41.467603
+## 36 Treatment 45.378577
+## 37 Treatment 44.267639
+## 38 Treatment 47.115202
+## 39 Treatment 43.516757
+## 40 Treatment 42.303282
+## 41 Treatment 43.965387
+## 42 Treatment 47.823471
+## 43 Treatment 45.370930
+## 44 Treatment 44.912617
+## 45 Treatment 44.568173
+## 46 Treatment 47.927551
+## 47 Treatment 45.459333
+## 48 Treatment 45.215247
+## 49 Treatment 42.243795
+## 50 Treatment 43.063634</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Save your new function’s output as a variable, and use a function to
+view the first 6 rows of the data frame.</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1000</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>data_output <span class="ot">&lt;-</span> <span class="fu">dataFCT</span>()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_output)</span></code></pre></div>
+<pre><code>##      Type     Value
+## 1 Control  9.331333
+## 2 Control  8.191215
+## 3 Control 10.061689
+## 4 Control 10.959083
+## 5 Control  8.820168
+## 6 Control  9.421766</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Let’s say you would like to know whether there is a statistically
+significant difference in “Value” (response variable y) depending on
+“Type” (explanatory variable x). Type ?aov in the console to determine
+how to run an analysis of variance (ANOVA) on your simulated data. Write
+a line of code that displays a summary of your ANOVA.</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">aov</span>(data_output[[<span class="dv">2</span>]] <span class="sc">~</span> data_output[[<span class="dv">1</span>]], <span class="at">data =</span> data_output))</span></code></pre></div>
+<pre><code>##                  Df Sum Sq Mean Sq F value Pr(&gt;F)    
+## data_output[[1]]  1  15429   15429    5641 &lt;2e-16 ***
+## Residuals        48    131       3                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Finally create a function that uses a data frame as its input and
+returns only the p-value of an ANOVA summary table (feel free to use
+Google/Stack Overflow). Write your code in such a way that you can use
+any simulated data set with two columns as the function’s argument.</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># two different means and two different SD</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1000</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Function: dataFCT</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates a simulated two column data frame where the values means can be chosen</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># input: </span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ouput: </span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------------</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>pFunc <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">d =</span> data_output){</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  table <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">aov</span>(d[[<span class="dv">2</span>]] <span class="sc">~</span> d[[<span class="dv">1</span>]], <span class="at">data =</span> d))</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> table[[<span class="dv">1</span>]][[<span class="st">&quot;Pr(&gt;F)&quot;</span>]][[<span class="dv">1</span>]]</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">pFunc</span>()</span></code></pre></div>
+<pre><code>## [1] 1.949452e-51</code></pre>
 </section>
 
 

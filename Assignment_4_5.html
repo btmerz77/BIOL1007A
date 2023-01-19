@@ -426,7 +426,7 @@ arrange the second variable in alphabetical order.</li>
 <ul>
 <li>rename the second column ‘my_LETTERS’</li>
 </ul>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dFrame1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;my_unifs&quot;</span>, <span class="st">&quot;my_LETTERS&quot;</span>)</span>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dFrame1)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;my_LETTERS&quot;</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dFrame1)</span></code></pre></div>
 <pre><code>##     my_unifs my_LETTERS
 ## 24 0.7177347          A

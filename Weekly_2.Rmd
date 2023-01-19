@@ -1,0 +1,75 @@
+---
+title: "Weekly 2"
+author: "Ben Merz"
+date: "2023-01-19"
+output:
+   prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+---
+
+1. Create a function that returns a data frame with 2 columns (named “Type” and “Value”) and 50 rows/observations.
+    + The first column should have “Control” as the first 25 observations and “Treatment” as the second half of observations.
+    + The second column should have the first 25 values as random and normally distributed with a mean of 10 and standard deviation of 1.5. The next 25 values of the second column should be random and normally distributed with a mean of 45 and standard deviation of 2.
+    + You can do this all as a single line of code in the function or by breaking it up into multiple code blocks.
+```{r}
+# two different means and two different SD
+set.seed(1000)
+########################
+# Function: dataFCT
+# Creates a simulated two column data frame where the values means can be chosen
+# input: 
+# ouput: 
+# --------------------------------------------------------
+dataFCT <- function(m1 = 10, sd1 = 1.5, m2 = 45, sd2 = 2){
+  dFrame <- data.frame(
+    Type = rep(c("Control", "Treatment"), each = 25),
+    Value = c(rnorm(25, m1, sd1), rnorm(25, m2, sd2))
+  )
+  return(dFrame)
+}
+
+dataFCT()
+```
+
+  
+  
+2. Save your new function’s output as a variable, and use a function to view the first 6 rows of the data frame.
+```{r}
+set.seed(1000)
+
+data_output <- dataFCT()
+head(data_output)
+```
+
+3. Let’s say you would like to know whether there is a statistically significant difference in “Value” (response variable y) depending on “Type” (explanatory variable x). Type ?aov in the console to determine how to run an analysis of variance (ANOVA) on your simulated data. Write a line of code that displays a summary of your ANOVA.
+
+```{r}
+summary(aov(data_output[[2]] ~ data_output[[1]], data = data_output))
+```
+
+4. Finally create a function that uses a data frame as its input and returns only the p-value of an ANOVA summary table (feel free to use Google/Stack Overflow). Write your code in such a way that you can use any simulated data set with two columns as the function’s argument.
+
+```{r}
+# two different means and two different SD
+set.seed(1000)
+########################
+# Function: dataFCT
+# Creates a simulated two column data frame where the values means can be chosen
+# input: 
+# ouput: 
+# --------------------------------------------------------
+
+pFunc <- function(d = data_output){
+  table = summary(aov(d[[2]] ~ d[[1]], data = d))
+  p <- table[[1]][["Pr(>F)"]][[1]]
+  return(p)
+}
+
+pFunc()
+```
+
+
+
+
+
