@@ -22,4 +22,4 @@ output:
 
 [Weekly 1](Weekly_1.html)
 
-[Weekly2](Weekly_2.html)
+[Weekly 2](Weekly_2.html)

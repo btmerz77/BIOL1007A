@@ -18,8 +18,8 @@ set.seed(1000)
 ########################
 # Function: dataFCT
 # Creates a simulated two column data frame where the values means can be chosen
-# input: 
-# ouput: 
+# input: numeric values of two means and their associated standard deviations
+# output: a two column data frame with the first twenty five values being Control and the second twenty five being of treatment
 # --------------------------------------------------------
 dataFCT <- function(m1 = 10, sd1 = 1.5, m2 = 45, sd2 = 2){
   dFrame <- data.frame(
@@ -51,13 +51,13 @@ summary(aov(data_output[[2]] ~ data_output[[1]], data = data_output))
 4. Finally create a function that uses a data frame as its input and returns only the p-value of an ANOVA summary table (feel free to use Google/Stack Overflow). Write your code in such a way that you can use any simulated data set with two columns as the function’s argument.
 
 ```{r}
-# two different means and two different SD
+#
 set.seed(1000)
 ########################
-# Function: dataFCT
-# Creates a simulated two column data frame where the values means can be chosen
-# input: 
-# ouput: 
+# Function: pFunc 
+# Displays only the p-value from a one way annova test of a two column data frame
+# input: Any two column data frame
+# output: The associated p-value for a one way annova test of that data frame.
 # --------------------------------------------------------
 
 pFunc <- function(d = data_output){
