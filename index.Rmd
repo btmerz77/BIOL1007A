@@ -7,8 +7,15 @@ output:
     theme: cayman
     highlight: github
 ---
+# Welcome
+<div align="center">
+![](/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Duck.png)
 
-## Daily Assignments
+<div align="left">
+This webpage was built to house this random aquatic avian as well as his portfolio for BIOL 1007: Reproducible Biology in R. This class focuses on learning how to code in R so as to reproducibly analyze and visualize data for biological study. Please  click on the links below at your leisure.
+
+<div align="left">
+# Daily Assignments
 
 [Daily 1](Assignment_1.html)
 
@@ -18,7 +25,7 @@ output:
 
 [Daily 4 and 5](Assignment_4_5.html)
 
-## Weekly Assignments
+# Weekly Assignments
 
 [Weekly 1](Weekly_1.html)
 
