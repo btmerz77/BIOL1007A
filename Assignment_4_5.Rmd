@@ -56,16 +56,16 @@ print(my_list)
 ```
   + create a new list, which has the element[2,2] from the matrix, the second element of the logical vector, and the second element of the letters vector.
   + use the typeof() function to confirm the underlying data types of each component in this list
-  + combine the underlying elements from the new list into a single atomic vector with the c() function.
-  + what is the data type of this vector?
 ```{r}
-
 my_list2 <- list(my_list$my_matrix[2,2], my_list$my_logical[2], my_list$my_letters[2])
 print(my_list2)
 str(my_list2)
+```
 
+  + combine the underlying elements from the new list into a single atomic vector with the c() function.
+  + what is the data type of this vector?
+```{r}
 a_vec <- unlist(my_list2)
-print(a_vec)
 typeof(a_vec)
 ```
 ### 3. Create an empty data frame with two variables (= columns) and 26 observations (= rows) below:
