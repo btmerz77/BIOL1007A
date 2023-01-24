@@ -98,9 +98,12 @@ p1 <- ggplot(data=d, aes(x=displ,y=cty)) +
   xlim(0,4) + ylim(0,20)
 print(p1)
 
+library(viridis)
+cols <- viridis(7, option ="viridis") #plasma, turbo, viridis
+ggplot(data=d, aes(x = class, y = hwy, fill=class)) +
+   geom_boxplot() +
+   scale_fill_manual(values = cols)
 
-# ggplot(data=d, aes(x = cyl, y = mpg, fill=cyl)) +
-#   geom_boxplot() +
-# scale_fill_manual(values = c("slategray", "#e74c3c", "darkblue"))
-
-
+library(patchwork)
+p1 + p2 # side by side
+p1 / p2 # over the top

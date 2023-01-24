@@ -1,0 +1,81 @@
+---
+title: "Assignment 7"
+author: "Ben Merz"
+date: "2023-01-24"
+output:
+    prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+---
+# Data wrangling and plotting
+
+```{r}
+library(ggplot2)
+library(ggthemes)
+library(patchwork)
+library(dplyr)
+```
+
+
+1. Using the built-in starwars data set in the dplyr package, create a new tibble with the following modifications:
+    * It only includes the species that have more than 1 individual represented in the data set. (hint: first use dplyr to summarize the number of individuals per species in the data frame; then create a vector/tibble of those names; subset the species that are included in that vector)
+    
+    * It only includes the columns that are not of type list (hint: use glimpse to check)
+```{r}
+sw_species <- starwars %>% 
+  count(species, sort = T) %>% 
+  filter(n > 1) %>%
+  print()
+
+sw_species2 <- starwars %>%
+  filter(species %in% sw_species$species) %>%
+  select(-(films:starships)) %>%
+  print()
+
+```
+
+2. Clean your data set: only include observations/rows that do not have an NA in the height column. Then, use dplyr to print a summary table showing the mean, median, and standard deviation of height for each species.
+```{r}
+sw_clean <- sw_species2[complete.cases(sw_species2$height),] %>%
+  print()
+  
+sw_tab <- sw_clean %>% 
+  group_by(species) %>%
+  summarize(mean_height = mean(height), median_height = median(height), sd_height = sd(height)) %>%
+  print()
+  
+```
+
+
+3. Create a box plot figure that shows the variation in heights among Star Wars species. Do the values in your summary table line up with the plot? Code so that each box plot (Species) is be filled with a different color. Change your axes labels so that species is capitalized and height is capitalized and shows units (cm). Use the theme_minimal option. Then look into the annotate or geom_text functions and add the text “p=1.2E-0.5” to the top right corner.
+```{r}
+p1 <- ggplot(data = sw_clean, aes(x = species, y = height, fill = species)) + 
+  geom_boxplot() +
+  labs(x="Species",
+       y="Height (cm)") +
+  theme_minimal() +
+  geom_text(aes(x = NA, y = max(height), label = "p = 1.2E-0.5"), size = 3.2)
+
+print(p1)
+```
+
+
+For an extra (optional) challenge: overlay the data points onto the box plots (hint: look into geom_jitter or geom_point). See if you can change the color of the points, depending on the gender or sex variables.
+
+```{r}
+p2 <- ggplot(data = sw_clean, aes(x = species, y = height, fill = species)) + 
+  geom_boxplot() +
+  geom_point(aes(fill = gender)) +
+  labs(x="Species",
+       y="Height (cm)") +
+  theme_minimal() +
+  geom_text(aes(x = NA, y = max(height), label = "p = 1.2E-0.5"), size = 3.2)
+
+
+print(p2)
+```
+
+
+4. Using the same or a different built-in data set, create at least one additional (and different kind of) plot. Experiment with different arguments, features, and colors.
+
+5. Finally, create a multi-panel figure with the graphs you created.
