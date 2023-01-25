@@ -54,7 +54,8 @@ p1 <- ggplot(data = sw_clean, aes(x = species, y = height, fill = species)) +
   labs(x="Species",
        y="Height (cm)") +
   theme_minimal() +
-  geom_text(aes(x = NA, y = max(height), label = "p = 1.2E-0.5"), size = 3.2)
+  geom_text(aes(x = NA, y = max(height), label = "p = 1.2E-0.5"), size = 3.2) +
+  theme_classic()
 
 print(p1)
 ```
@@ -64,12 +65,13 @@ For an extra (optional) challenge: overlay the data points onto the box plots (h
 
 ```{r}
 p2 <- ggplot(data = sw_clean, aes(x = species, y = height, fill = species)) + 
-  geom_boxplot() +
-  geom_point(aes(fill = gender)) +
+  geom_boxplot(show.legend = FALSE) +
+  geom_point(aes(color = gender), show.legend = FALSE) +
   labs(x="Species",
        y="Height (cm)") +
   theme_minimal() +
-  geom_text(aes(x = NA, y = max(height), label = "p = 1.2E-0.5"), size = 3.2)
+  geom_text(aes(x = NA, y = max(height), label = "p = 1.2E-0.5"), size = 3.2) +
+  theme_classic()
 
 
 print(p2)
@@ -77,5 +79,25 @@ print(p2)
 
 
 4. Using the same or a different built-in data set, create at least one additional (and different kind of) plot. Experiment with different arguments, features, and colors.
+```{r}
+library(viridis)
+cols <- viridis(4, option ="turbo") #plasma, turbo, viridis
+
+p3 <- ggplot(data=sw_clean, aes(x = mass, y = height)) +
+  geom_point(aes(color = sex)) +
+  geom_smooth(method = "lm", se = T) +
+  labs(x = "Mass (kg)", y = "Height (cm)") +
+  scale_color_manual(values = cols) +
+  theme_classic()
+# NA values in mass are automatically removed which are the 16 errors that appear
+
+
+print(p3)
+```
 
 5. Finally, create a multi-panel figure with the graphs you created.
+```{r}
+p2 / p1 / p3
+```
+
+
