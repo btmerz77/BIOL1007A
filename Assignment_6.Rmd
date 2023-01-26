@@ -23,10 +23,9 @@ glimpse(iris)
 
 2. Create a new data frame iris1 that contains only the species virginica and versicolor with sepal lengths longer than 6 cm and sepal widths longer than 2.5 cm. How many observations and variables are in the data set?
 ```{r}
-iris1 <- filter(iris, 
-                Species == "virginica" | Species == "versicolor" & 
-                Sepal.Length > 6 & Sepal.Width > 2.5
-                )
+iris1 <- filter(iris, Species %in% c("versicolor", "virginica"), Sepal.Length > 6 , Sepal.Width > 2.5) 
+### Had Sepal.Length > 6 & Sepal.Width Should be seperated by a ,
+### Using and applies the previous conditon and is not wanted in this case
 
 glimpse(iris1)
 ```
@@ -49,6 +48,7 @@ iris4 <- mutate(iris3,
                 Sepal.Area = Sepal.Length * Sepal.Width, 
                 .after = Sepal.Width
                 )
+glimpse(iris4)
 ```
 
 6. Create the variable irisTab that shows the average sepal length, the average sepal width, and the sample size of the entire iris4 data frame and print irisTab.
@@ -64,10 +64,10 @@ print(irisTab)
 
 7. Finally, create iris5 that calculates the average sepal length, the average sepal width, and the sample size for each species of in the iris4 data frame and print iris5.
 ```{r}
-iris_species <- group_by(iris4, Species)
-summarize(iris_species, 
+. <- group_by(iris4, Species) ## Instead of creating a new variable, using the temporary . variable works better
+summarize(., 
           Mean.Sepal.Length = mean(Sepal.Length), 
-          Mean.Sepal.Width = mean(Sepal.Width), 
+          Mean.Sepal.Width = mean(Sepal.Width), Mean.Sepal.Area = mean(Sepal.Area), # Forgot mean of sepal area
           Sample.Size = n()
           )
 
@@ -76,18 +76,17 @@ summarize(iris_species,
 8. In these exercises, you have successively modified different versions of the data frame iris1 iris2 iris3 iris4 iris5. At each stage, the output data frame from one operation serves as the input fro the next. A more efficient way to do this is to use the pipe operator %>% from the tidyr package. Rework all of your previous statements (except for irisTab) into an extended piping operation that uses iris as the input and generates irisFinal as the output.
 ```{r}
 irisFinal <- iris %>% 
-  filter(Species == "virginica" | Species == "versicolor" & 
-          Sepal.Length > 6 & Sepal.Width > 2.5
-          ) %>%
+  filter(Species %in% c("versicolor", "virginica"), Sepal.Length > 6 , Sepal.Width > 2.5) %>% # update the filter function to match the top and get rid of &
   select(Species, Sepal.Length, Sepal.Width) %>%
-  arrange(by = desc(Sepal.Length)) %>%
+# arrange(by = desc(Sepal.Length)) %>% unneccary code and doesn't affect end result
   mutate(Sepal.Area = Sepal.Length * Sepal.Width, .after = Sepal.Width) %>%
   group_by(Species) %>%
   summarize(Mean.Sepal.Length = mean(Sepal.Length), 
-            Mean.Sepal.Width = mean(Sepal.Width), 
+            Mean.Sepal.Width = mean(Sepal.Width),
+            Mean.Sepal.Area = mean(Sepal.Area),
             Sample.Size = n()
             ) %>%
-  print()
+  arrange(desc(Mean.Sepal.Area)) # added to clean up table
 
 ```
 
