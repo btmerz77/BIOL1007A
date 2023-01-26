@@ -1,0 +1,103 @@
+---
+title: "Assignment 8"
+author: "Ben Merz"
+date: "2023-01-26"
+output:
+  prettydoc::html_pretty:
+  theme: cayman
+  highlight: github
+---
+# Code Reflection
+
+1. Go through your recent assignments and the posted solutions (Assignment 6 posted solutions and Weekly Assignment 2 solutions) - compare your code to the posted code.
+  * Can you run your simulated data function with new values for the means? If not, what do you need to change about your code?
+  * Are there differences between the posted code and yours? Did you notice you were missing anything?
+  * Make sure you annotate your code using # and leave brief descriptions of your thought process.
+
+For assignment 6, I just annotated my previous [code](Assignment_6.html)
+
+```{r}
+### Orginial Code
+
+
+
+set.seed(1000)
+########################
+# Function: dataFCT
+# Creates a simulated two column data frame where the values means can be chosen
+# input: numeric values of two means and their associated standard deviations
+# output: a two column data frame with the first twenty five values being Control and the second twenty five being of treatment
+# --------------------------------------------------------
+dataFCT <- function(m1 = 10, sd1 = 1.5, m2 = 45, sd2 = 2){
+  dFrame <- data.frame(
+    Type = rep(c("Control", "Treatment"), each = 25),
+    Value = c(rnorm(25, m1, sd1), rnorm(25, m2, sd2))
+  )
+  return(dFrame)
+}
+
+########################
+# Function: pFunc 
+# Displays only the p-value from a one way annova test of a two column data frame
+# input: Any two column data frame
+# output: The associated p-value for a one way annova test of that data frame.
+# --------------------------------------------------------
+
+pFunc <- function(d = data_output){
+  table = summary(aov(d[[2]] ~ d[[1]], data = d))
+  p <- table[[1]][["Pr(>F)"]][[1]]
+  return(p)
+}
+```
+
+
+```{r}
+### Annoatated code
+
+
+set.seed(1000)
+########################
+# Function: dataFCT
+# Creates a simulated two column data frame where the values means can be chosen
+# input: numeric values of two means and their associated standard deviations
+# output: a two column data frame with the first twenty five values being Control and the second twenty five being of treatment
+# --------------------------------------------------------
+dataFCT <- function(m1 = 10, sd1 = 1.5, m2 = 45, sd2 = 2, n = 25){
+  dFrame <- data.frame(
+    Type = rep(c("Control", "Treatment"), each = n),
+    Value = c(rnorm(n, m1, sd1), rnorm(n, m2, sd2))
+  )
+  return(dFrame)
+}
+
+dataFCT()
+dataFCT(m1 = 12, sd1 = 1.7, m2 = 73, sd2 = 3, n = 30)
+
+# I can run my simulated data function with new values for the means
+# However I did not add the ability to change the sample size.
+# Replacing the count in each r norm function is more elegant since it's a repeated value.
+# It also makes this function more applicable to other cases
+
+
+
+
+########################
+# Function: pFunc 
+# Displays only the p-value from a one way annova test of a two column data frame
+# input: Any two column data frame
+# output: The associated p-value for a one way annova test of that data frame.
+# --------------------------------------------------------
+
+pFunc <- function(d = NULL){
+  table = summary(aov(d[[2]] ~ d[[1]], data = d))
+  p <- table[[1]][["Pr(>F)"]][[1]]
+  return(p)
+}
+
+# My default input I set as the variable I used to store the default output of my data function
+# This is problematic because it links pFunc to dataFCT. Setting the default data to null removes this.
+# I prefer the way that I extract the data by column instead of name. Column names can change.
+
+pFunc(dataFCT())
+```
+

@@ -4,8 +4,8 @@ author: "Ben Merz"
 date: "2023-01-10"
 output: 
   prettydoc::html_pretty:
-    theme: cayman
-    highlight: github
+  theme: cayman
+  highlight: github
 ---
 # Welcome
 <div align="center">
@@ -28,6 +28,8 @@ This webpage was built to house this random aquatic avian as well as his portfol
 [Daily 6](Assignment_6.html)
 
 [Daily 7](Assignment_7.html)
+
+[Daily 8](Assignment_8.html)
 
 # Weekly Assignments
 
