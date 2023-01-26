@@ -17,22 +17,22 @@ This webpage was built to house this random aquatic avian as well as his portfol
 <div align="left">
 # Daily Assignments
 
-[Daily 1](Assignment_1.html)
+[Daily 1](Daily_Assignments/Assignment_1.html)
 
-[Daily 2](Assignment_2.html)
+[Daily 2](Daily_Assignments/Assignment_2.html)
 
-[Daily 3](Assignment_3.html)
+[Daily 3](Daily_Assignments/Assignment_3.html)
 
-[Daily 4 and 5](Assignment_4_5.html)
+[Daily 4 and 5](Daily_Assignments/Assignment_4_5.html)
 
-[Daily 6](Assignment_6.html)
+[Daily 6](Daily_Assignments/Assignment_6.html)
 
-[Daily 7](Assignment_7.html)
+[Daily 7](Daily_Assignments/Assignment_7.html)
 
-[Daily 8](Assignment_8.html)
+[Daily 8](Daily_Assignments/Assignment_8.html)
 
 # Weekly Assignments
 
-[Weekly 1](Weekly_1.html)
+[Weekly 1](Weekly_Assginments/Weekly_1.html)
 
-[Weekly 2](Weekly_2.html)
+[Weekly 2](Weekly_Assginments/Weekly_2.html)
