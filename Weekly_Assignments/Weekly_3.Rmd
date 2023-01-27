@@ -11,11 +11,23 @@ output:
 Go to Dryad to choose a published paper and data set and reconstruct your own figure. Code a ggplot graph that looks as close to the published figure as you can.
 
 # Goal graph
-Data set citation: Cenzer, Meredith (2022), Adult facilitation becomes competition as juvenile soapberry bugs age, Dryad, Dataset, https://doi.org/10.5061/dryad.34tmpg4ks
+Data set citation: Fujimoto, Shingo et al. (2022), Alternative reproductive tactics in male freshwater fish influence the accuracy of species recognition, Dryad, Dataset, https://doi.org/10.5061/dryad.5hqbzkh2g
 
-Paper citation: Cenzer, M. (2021). Adult facilitation becomes competition as juvenile soapberry bugs age. Ecology and Evolution, 11, 13335– 13347. https://doi.org/10.1002/ece3.8056
+Paper citation: Fujimoto, S, Tsurui-Sato, K, Katsube, N, Tatsuta, H, Tsuji, K. Alternative reproductive tactics in male freshwater fish influence the accuracy of species recognition. Ecol Evol. 2021; 11: 3884– 3900. https://doi.org/10.1002/ece3.7267
 
-![](/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/Cezner_goal_graph.jpeg)
+![](/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/w_3/Goal_graph.jpeg)
 
 # My attempt
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
 

@@ -64,7 +64,7 @@ fish_encounters %>%
   # a curated resource that makes research data discoverable, freely reusable, and citable.
   # You can explore data sets here: https://datadryad.org/search
 
-dryadData <- read.table("/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/veysey-babbitt_data_amphibian.csv", header=TRUE, sep=",", stringsAsFactors = TRUE)
+dryadData <- read.table("/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/d_8/veysey-babbitt_data_amphibian.csv", header=TRUE, sep=",", stringsAsFactors = TRUE)
 
 glimpse(dryadData)
 head(dryadData)
