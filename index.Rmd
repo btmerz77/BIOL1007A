@@ -33,6 +33,8 @@ This webpage was built to house this random aquatic avian as well as his portfol
 
 # Weekly Assignments
 
-[Weekly 1](Weekly_Assginments/Weekly_1.html)
+[Weekly 1](Weekly_Assignments/Weekly_1.html)
 
-[Weekly 2](Weekly_Assginments/Weekly_2.html)
+[Weekly 2](Weekly_Assignments/Weekly_2.html)
+
+[Weekly 3](Weekly_Assignments/Weekly_3.html)

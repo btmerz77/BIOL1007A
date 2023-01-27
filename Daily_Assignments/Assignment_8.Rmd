@@ -109,7 +109,7 @@ library(tidyverse)
 library(ggthemes)
 
 # Load in data set for analysis and new graph
-dryadData <- read.table("/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/veysey-babbitt_data_amphibian.csv", header=TRUE, sep=",", stringsAsFactors = TRUE)
+dryadData <- read.table("/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/d_8/veysey-babbitt_data_amphibian.csv", header=TRUE, sep=",", stringsAsFactors = TRUE)
 
 # Setting the species of RASY and AMMA as factor with two levels(the abreviations common name)
 dryadData$species<-factor(dryadData$species, labels=c("Spotted Salamander", "Wood Frog")) #creating 'labels' to use for the plot
