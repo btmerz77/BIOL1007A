@@ -19,29 +19,21 @@ Paper citation: Fujimoto, S, Tsurui-Sato, K, Katsube, N, Tatsuta, H, Tsuji, K. A
 
 # My attempt
 
-```{r}
-library(beeswarm)
-library(AER)
+```{r message=FALSE}
+library(ggplot2)
+library(ggthemes)
+library(patchwork)
+library(dplyr)
+library(ggbeeswarm)
+
 
 # set the directory and data file
 maleIDandBehavior <- read.csv("/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/w_3/summary/exp2_matingBehavior/maleIDandBehavior.csv")
 
-# Table 2
-# The difference between conspecific and heterospecific females
-# assumed by the Poisson distribution, male species and female species
-summary(glm(gonopodial_thrust ~ male_species * combination, data = maleIDandBehavior, family = poisson))
-summary(glm(gonopodial_swing ~ male_species * combination, data = maleIDandBehavior, family = poisson))
-summary(glm(follow ~ male_species * combination, data = maleIDandBehavior, family = poisson))
 
-# sigmoid display is only P. reticula males and jolt is only G. affinis males
-summary(glm(sigmoid_display ~ combination, data = subset(maleIDandBehavior, male_species == "poecilia"), family = poisson))
-summary(glm(jolt ~ combination, data = subset(maleIDandBehavior, male_species == "gambusia"), family = poisson))
+  # data manipulation
 
-
-
-# ---------------------------------------------------------
-# Drawing the boxplot and beeswarm plot
-# ---------------------------------------------------------
+  
 # Calculate the frequency in a minute for each behavior
 maleIDandBehavior$gonopodial_thrust <- maleIDandBehavior$gonopodial_thrust / 20
 maleIDandBehavior$gonopodial_swing <- maleIDandBehavior$gonopodial_swing / 20
@@ -49,58 +41,95 @@ maleIDandBehavior$follow <- maleIDandBehavior$follow / 20
 maleIDandBehavior$sigmoid_display <- maleIDandBehavior$sigmoid_display / 20
 maleIDandBehavior$jolt <- maleIDandBehavior$jolt / 20
 
-# rename the factor to distinguish male species and female species on the graph label
-levels(maleIDandBehavior$male_species) <- c("gaM", "poM")
-levels(maleIDandBehavior$female_species) <- c("gaF", "poF")
+# rename male species and female as speces as factors to distinguish in label
+maleIDandBehavior$male_species <- factor(maleIDandBehavior$male_species, labels = c("gaM", "poM"))
+maleIDandBehavior$female_species <- factor(maleIDandBehavior$female_species, labels = c("gaF", "poF"))
+# also need to esablish combination as a factor
+maleIDandBehavior$combination <- factor(maleIDandBehavior$combination, labels = c("hetero", "con"))
 
-# reorder the label of female species
+# reorder the label of male species to match ordering
 maleIDandBehavior$male_species <- relevel(maleIDandBehavior$male_species, ref = "poM")
-maleIDandBehavior$female_species <- relevel(maleIDandBehavior$female_species, ref = "poF")
+# also need to reorder comobination to correct value
+maleIDandBehavior$combination <- relevel(maleIDandBehavior$combination, ref = "hetero")
 
-# separating the dataframe for drawing the beeswarm plot
+
+# data subsetting for overlay of beeswarm plot
 gaMgaF <- subset(maleIDandBehavior, male_species == "gaM" & female_species == "gaF")
 poMgaF <- subset(maleIDandBehavior, male_species == "poM" & female_species == "gaF")
 gaMpoF <- subset(maleIDandBehavior, male_species == "gaM" & female_species == "poF")
 poMpoF <- subset(maleIDandBehavior, male_species == "poM" & female_species == "poF")
 
-par(mfrow = c(2,3))
-# gonopodial_thrust
-boxplot(gonopodial_thrust ~ combination * male_species, data = maleIDandBehavior,
-        ylab = "Count per minute", xlab = "",
-        main = "Gonopodial thrust", outline = FALSE, las = 1, ylim = c(0, 1))
-beeswarm(list(poMpoF$gonopodial_thrust, poMgaF$gonopodial_thrust, gaMgaF$gonopodial_thrust, gaMpoF$gonopodial_thrust),
-         method = "swarm", spacing = 1.0, cex = 1.2, add = TRUE)
 
-# gonopodial_swing
-boxplot(gonopodial_swing ~ combination * male_species, data = maleIDandBehavior,
-        ylab = "", xlab = "",
-        main = "Gonopodial swing", outline = FALSE, las = 1, ylim = c(0, 1))
-beeswarm(list(poMpoF$gonopodial_swing, poMgaF$gonopodial_swing, gaMgaF$gonopodial_swing, gaMpoF$gonopodial_swing),
-         method = "swarm", spacing = 1.0, cex = 1.2, add = TRUE)
+  # Graphing
 
-# empty plot to adjust the order
-plot(c(1), c(3), type = "n", yaxt = "n", xaxt = "n", ylab = "", xlab = "", bty = "n")
 
-# follow
-boxplot(follow ~ combination * male_species, data = maleIDandBehavior,
-        ylab = "", xlab = "",
-        main = "Follow", outline = FALSE, las = 1, ylim = c(0, 2))
-beeswarm(list(poMpoF$follow, poMgaF$follow, gaMgaF$follow, gaMpoF$follow),
-         method = "swarm", spacing = 1.0, cex = 1.2, add = TRUE)
 
-# sigmoid_display
-boxplot(sigmoid_display ~ combination * male_species, data = maleIDandBehavior,
-        ylab = "", xlab = "",
-        main = "Sigmoid display", outline = FALSE, las = 1, ylim = c(0, 1))
-beeswarm(list(poMpoF$sigmoid_display, poMgaF$sigmoid_display, gaMgaF$sigmoid_display, gaMpoF$sigmoid_display),
-         method = "swarm", spacing = 1.0, cex = 1.2, add = TRUE)
+gg_thrust <- ggplot(data = maleIDandBehavior, 
+            aes(x = interaction(male_species, combination, lex.order = T), #lex.order assigns the
+                y = gonopodial_thrust)) +
+  geom_boxplot() +
+  geom_beeswarm() +
+  theme_few()
 
-# jolt
-boxplot(jolt ~ combination * male_species, data = maleIDandBehavior,
-        ylab = "", xlab = "Combination of male species and female species",
-        main = "Jolt", outline = FALSE, las = 1, ylim = c(0, 1))
-beeswarm(list(poMpoF$jolt, poMgaF$jolt, gaMgaF$jolt, gaMpoF$jolt),
-         method = "swarm", spacing = 1.0, cex = 1.2, add = TRUE)
+print(gg_thrust)
+
+
+# ggplot(data=d, aes(x = class, y = hwy, fill=class)) +
+#    geom_boxplot() +
+#    scale_fill_manual(values = cols)
+  
+  
+  # 
+  # ylab("Number of breeding adults") + # label the y axis
+  # xlab("") + # no label on x axis
+  # scale_y_continuous(breaks = c(0,100,200,300,400,500)) + # y axis should be broken up by 100s continyally
+  # scale_x_discrete(labels=c("30 (Ref)", "124 (Ref)", "141 (Ref)", "25 (100m)","39 (100m)","55 (100m)","129 (100m)", "7 (30m)","19 (30m)","20 (30m)","59 (30m)")) +# discrete labels broken up with the references
+  # facet_wrap(~species, nrow=2, strip.position="right")
+
+
+
+# 
+# # separating the dataframe for drawing the beeswarm plot
+# 
+# 
+# par(mfrow = c(2,3))
+# # gonopodial_thrust
+# boxplot(gonopodial_thrust ~ combination * male_species, data = maleIDandBehavior,
+#         ylab = "Count per minute", xlab = "",
+#         main = "Gonopodial thrust", outline = FALSE, las = 1, ylim = c(0, 1))
+# beeswarm(list(poMpoF$gonopodial_thrust, poMgaF$gonopodial_thrust, gaMgaF$gonopodial_thrust, gaMpoF$gonopodial_thrust),
+#          method = "swarm", spacing = 1.0, cex = 1.2, add = TRUE)
+# 
+# # gonopodial_swing
+# boxplot(gonopodial_swing ~ combination * male_species, data = maleIDandBehavior,
+#         ylab = "", xlab = "",
+#         main = "Gonopodial swing", outline = FALSE, las = 1, ylim = c(0, 1))
+# beeswarm(list(poMpoF$gonopodial_swing, poMgaF$gonopodial_swing, gaMgaF$gonopodial_swing, gaMpoF$gonopodial_swing),
+#          method = "swarm", spacing = 1.0, cex = 1.2, add = TRUE)
+# 
+# # empty plot to adjust the order
+# plot(c(1), c(3), type = "n", yaxt = "n", xaxt = "n", ylab = "", xlab = "", bty = "n")
+# 
+# # follow
+# boxplot(follow ~ combination * male_species, data = maleIDandBehavior,
+#         ylab = "", xlab = "",
+#         main = "Follow", outline = FALSE, las = 1, ylim = c(0, 2))
+# beeswarm(list(poMpoF$follow, poMgaF$follow, gaMgaF$follow, gaMpoF$follow),
+#          method = "swarm", spacing = 1.0, cex = 1.2, add = TRUE)
+# 
+# # sigmoid_display
+# boxplot(sigmoid_display ~ combination * male_species, data = maleIDandBehavior,
+#         ylab = "", xlab = "",
+#         main = "Sigmoid display", outline = FALSE, las = 1, ylim = c(0, 1))
+# beeswarm(list(poMpoF$sigmoid_display, poMgaF$sigmoid_display, gaMgaF$sigmoid_display, gaMpoF$sigmoid_display),
+#          method = "swarm", spacing = 1.0, cex = 1.2, add = TRUE)
+# 
+# # jolt
+# boxplot(jolt ~ combination * male_species, data = maleIDandBehavior,
+#         ylab = "", xlab = "Combination of male species and female species",
+#         main = "Jolt", outline = FALSE, las = 1, ylim = c(0, 1))
+# beeswarm(list(poMpoF$jolt, poMgaF$jolt, gaMgaF$jolt, gaMpoF$jolt),
+#          method = "swarm", spacing = 1.0, cex = 1.2, add = TRUE)
 ```
 
 
