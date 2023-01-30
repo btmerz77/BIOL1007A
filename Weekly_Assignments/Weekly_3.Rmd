@@ -134,9 +134,8 @@ print(gg_jolt)
 
 ### create multipanel figure
 bigFig <- (gg_thrust + gg_swing) / (gg_follow + gg_sigmoid) / (gg_jolt + plot_spacer()) + 
-  plot_annotation(
-    tag_levels = list(c("(a)", "(b)", "(c)", "(d)", "(e)"))) + # adding taggin to each individual plot
-  plot_layout(widths = 2, heights = 20) # resize the grid so that plots fit
+  plot_annotation(tag_levels = list(c("(a)", "(b)", "(c)", "(d)", "(e)"))) +
+  plot_layout(widths = 100, heights = 2000) # resize the grid so that plots fit
 
 print(bigFig)
 ```
