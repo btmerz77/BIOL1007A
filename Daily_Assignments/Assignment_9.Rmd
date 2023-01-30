@@ -1,0 +1,61 @@
+---
+title: "Assignment 9"
+author: "Ben Merz"
+date: "2023-01-30"
+output:
+  prettydoc::html_pretty:
+  theme: cayman
+  highlight: github
+---
+1. Using a for loop and an if statement, write a function to calculate the number of zeroes in a numeric vector. Before entering the loop, set up a vector of integers with some zero values. Then, set up a counter variable counter <- 0. Inside the loop, add 1 to counter each time you have a zero in the vector. Finally, use return(counter) for the output.
+
+```{r}
+
+v1 <- sample(c(0:7), size = 150, replace = T)
+counter <- 0
+
+zeroCount <- for(i in v1){
+  if(i == 0){counter <- counter + 1}
+}
+
+print(counter)
+
+
+```
+
+2. Write a function that takes as input two integers representing the number of rows and columns in a matrix. The output is a matrix of these dimensions in which each element is the product of the row number x the column number.
+
+```{r}
+
+##################################################
+# FUNCTION: matrix_gen
+# generates matrix of specified dimensions 
+# inputs: the rows (r) and the colums (c) of the desired matrix
+# outputs: matrix of r x c dimension where each element is the product of the row number x the column number
+#------------------------------------------------- 
+matrix_gen <- function(r = NULL, c = NULL){
+  mat <- matrix(NA, nrow = r, ncol = c)
+  for (i in 1:nrow(mat)) {
+    for (j in 1:ncol(mat)) {
+      mat[i,j] <- i * j
+    } # end of column j loop
+  } # end or row i loop
+  return(mat)
+}
+
+matrix_gen(5, 6)
+  
+  
+
+```
+
+3. Use a for loop to repeat your previous functions from Weekly Assignment 2 (which simulate a data frame and extract a p-value) 100 times. Store the results in a data frame that has 1 column indicating the replicate number and 1 column for the p-values (a total of 2 columns and 100 rows).
+
+```{r}
+
+
+
+```
+
+
+
