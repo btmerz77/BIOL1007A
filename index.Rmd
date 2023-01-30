@@ -31,6 +31,8 @@ This webpage was built to house this random aquatic avian as well as his portfol
 
 [Daily 8](Daily_Assignments/Assignment_8.html)
 
+[Daily 9](Daily_Assignments/Assignment_9.html)
+
 # Weekly Assignments
 
 [Weekly 1](Weekly_Assignments/Weekly_1.html)
