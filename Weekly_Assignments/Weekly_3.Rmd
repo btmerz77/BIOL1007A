@@ -118,7 +118,7 @@ print(gg_sigmoid)
 
 # Jolts
 gg_jolt <- ggplot(data = maleIDandBehavior, 
-            aes(x = interaction(male_species, combination, lex.order = T), #lex.order assigns the
+            aes(x = interaction(male_species, combination, lex.order = T), #lex.order assigns the porder with which the interaction is treated
                 y = jolt)) +
   scale_x_discrete(name = c("P. reticulata", "G. affinis"), labels = c("con.", "hetero.", "con.", "hetero.")) +
   ylab(NULL) + # set y label
