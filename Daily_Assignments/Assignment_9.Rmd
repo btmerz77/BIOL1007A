@@ -26,7 +26,6 @@ print(counter)
 2. Write a function that takes as input two integers representing the number of rows and columns in a matrix. The output is a matrix of these dimensions in which each element is the product of the row number x the column number.
 
 ```{r}
-
 ##################################################
 # FUNCTION: matrix_gen
 # generates matrix of specified dimensions 

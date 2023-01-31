@@ -1,0 +1,51 @@
+---
+title: "Weekly 4"
+author: "Ben Merz"
+date: "2023-01-31"
+output:
+  prettydoc::html_pretty:
+  theme: cayman
+  highlight: github
+---
+
+Simulate a brand new data frame (the type of data is up to you) and conduct a statistical analysis in R using 2 variables. Create a basic ggplot that goes with the analysis.
+
+```{r message=FALSE, warning=FALSE}
+# Load libraries
+library(tidyverse)
+library(ggthemes)
+
+#Simulate data
+########################
+# Function: dogFunc
+# Creates a simulated two column data frame of dog species and random weights (kg)
+# input: Number of rows (n)
+# output: A two column data frame of rows n where the first column is a random species of dog of either portugeues, labradoodle, pug, poodle, or wippet and a random associated mass between 5 and 50 kg
+# --------------------------------------------------------
+dogFunc <- function(n = 100){
+  dFrame <- data.frame(
+    Species = factor(sample(c("Portuguese", "Labradoodle", "Pug", "Poodle", "Wippet"), replace = T, size = n)),
+    Mass = runif(n, min = 5, max = 50)
+  )
+  return(dFrame)
+}
+
+dogData <- dogFunc()
+print(dogData)
+
+
+
+# Statistical analysis of dogFunc
+ANOdog <- aov(Mass ~ Species, data = dogData)
+print(ANOdog)
+summary(ANOdog) # is mass signifigance
+TukeyHSD(ANOdog) # if so, between what specific species
+
+# ggplot of dogFunc data
+ggplot(dogData, aes(x=Species, y=Mass)) +
+  geom_boxplot() +
+  theme_few()
+
+
+```
+
