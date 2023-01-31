@@ -163,7 +163,7 @@ output.</li>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(counter)</span></code></pre></div>
-<pre><code>## [1] 19</code></pre>
+<pre><code>## [1] 13</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Write a function that takes as input two integers representing the
 number of rows and columns in a matrix. The output is a matrix of these
@@ -200,6 +200,152 @@ times. Store the results in a data frame that has 1 column indicating
 the replicate number and 1 column for the p-values (a total of 2 columns
 and 100 rows).</li>
 </ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Function: dataFCT</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates a simulated two column data frame where the values means can be chosen</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># input: numeric values of two means and their associated standard deviations</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># output: a two column data frame with the first twenty five values being Control and the second twenty five being of treatment</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------------</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>dataFCT <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">m1 =</span> <span class="dv">10</span>, <span class="at">sd1 =</span> <span class="fl">1.5</span>, <span class="at">m2 =</span> <span class="dv">45</span>, <span class="at">sd2 =</span> <span class="dv">2</span>, <span class="at">n =</span> <span class="dv">25</span>){</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  dFrame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Type =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Treatment&quot;</span>), <span class="at">each =</span> n),</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Value =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(n, m1, sd1), <span class="fu">rnorm</span>(n, m2, sd2))</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(dFrame)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Function: pFunc </span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Displays only the p-value from a one way annova test of a two column data frame</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># input: Any two column data frame</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># output: The associated p-value for a one way annova test of that data frame.</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------------</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>pFunc <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">d =</span> <span class="cn">NULL</span>){</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  table <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">aov</span>(d[[<span class="dv">2</span>]] <span class="sc">~</span> d[[<span class="dv">1</span>]], <span class="at">data =</span> d))</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> table[[<span class="dv">1</span>]][[<span class="st">&quot;Pr(&gt;F)&quot;</span>]][[<span class="dv">1</span>]]</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Function: df_func </span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co"># creates a 1 column data frame of some length (rows) that fills in each value with a random p-value from the pFunc and dataFCT functions</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co"># input: a list of numbers from 1:n</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="co"># output: a dataframe with n rows</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------------</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>df_func <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">rows =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> rows)</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(df) <span class="ot">&lt;-</span> <span class="st">&quot;p-values&quot;</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> rows){</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>   df[i, ] <span class="ot">&lt;-</span> <span class="fu">pFunc</span>(<span class="fu">dataFCT</span>())</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="fu">df_func</span>()</span></code></pre></div>
+<pre><code>##         p-values
+## 1   1.078972e-49
+## 2   1.233422e-49
+## 3   2.990767e-52
+## 4   1.225868e-46
+## 5   4.135915e-50
+## 6   1.385869e-50
+## 7   9.395367e-49
+## 8   6.711747e-50
+## 9   2.113851e-51
+## 10  1.807088e-51
+## 11  1.825315e-50
+## 12  3.317741e-52
+## 13  5.622556e-52
+## 14  6.982980e-51
+## 15  2.010427e-49
+## 16  1.436456e-51
+## 17  1.659865e-51
+## 18  1.907132e-52
+## 19  6.827645e-50
+## 20  1.756686e-46
+## 21  8.457438e-51
+## 22  2.109878e-51
+## 23  8.301654e-51
+## 24  1.222043e-49
+## 25  3.349695e-50
+## 26  2.920332e-48
+## 27  9.399405e-52
+## 28  4.385575e-52
+## 29  4.079085e-50
+## 30  3.363057e-50
+## 31  1.812276e-50
+## 32  2.205473e-47
+## 33  6.947724e-51
+## 34  1.809614e-51
+## 35  1.839410e-47
+## 36  7.068734e-49
+## 37  1.597600e-47
+## 38  1.072541e-45
+## 39  6.471280e-54
+## 40  2.985403e-50
+## 41  1.026110e-50
+## 42  6.174053e-53
+## 43  1.334722e-46
+## 44  5.014209e-50
+## 45  1.243286e-52
+## 46  2.484565e-51
+## 47  2.330842e-49
+## 48  5.775363e-49
+## 49  2.888631e-49
+## 50  3.437129e-49
+## 51  5.405997e-52
+## 52  1.155140e-51
+## 53  6.865931e-53
+## 54  1.144061e-48
+## 55  8.420686e-50
+## 56  6.908871e-52
+## 57  2.006458e-51
+## 58  4.037958e-53
+## 59  2.561458e-51
+## 60  6.092663e-50
+## 61  2.317068e-53
+## 62  1.744498e-48
+## 63  1.208874e-48
+## 64  7.408173e-50
+## 65  2.634953e-50
+## 66  3.098050e-49
+## 67  9.169331e-49
+## 68  1.034332e-47
+## 69  1.215022e-54
+## 70  2.913858e-50
+## 71  8.925464e-49
+## 72  2.718178e-47
+## 73  4.858736e-49
+## 74  7.509203e-51
+## 75  7.435446e-50
+## 76  9.029339e-50
+## 77  2.174274e-47
+## 78  2.276565e-48
+## 79  2.615182e-49
+## 80  2.371950e-51
+## 81  1.081640e-49
+## 82  3.040662e-49
+## 83  2.352139e-51
+## 84  1.905962e-50
+## 85  1.724393e-52
+## 86  9.718025e-51
+## 87  1.699449e-51
+## 88  2.780394e-51
+## 89  5.383773e-49
+## 90  2.497125e-49
+## 91  3.086726e-51
+## 92  1.817503e-48
+## 93  1.425049e-50
+## 94  1.972153e-47
+## 95  2.877693e-48
+## 96  4.573914e-52
+## 97  6.542418e-52
+## 98  4.229107e-50
+## 99  9.761774e-51
+## 100 5.450496e-51</code></pre>
 </section>
 
 

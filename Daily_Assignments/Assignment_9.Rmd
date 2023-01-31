@@ -52,9 +52,51 @@ matrix_gen(5, 6)
 3. Use a for loop to repeat your previous functions from Weekly Assignment 2 (which simulate a data frame and extract a p-value) 100 times. Store the results in a data frame that has 1 column indicating the replicate number and 1 column for the p-values (a total of 2 columns and 100 rows).
 
 ```{r}
+########################
+# Function: dataFCT
+# Creates a simulated two column data frame where the values means can be chosen
+# input: numeric values of two means and their associated standard deviations
+# output: a two column data frame with the first twenty five values being Control and the second twenty five being of treatment
+# --------------------------------------------------------
+dataFCT <- function(m1 = 10, sd1 = 1.5, m2 = 45, sd2 = 2, n = 25){
+  dFrame <- data.frame(
+    Type = rep(c("Control", "Treatment"), each = n),
+    Value = c(rnorm(n, m1, sd1), rnorm(n, m2, sd2))
+  )
+  return(dFrame)
+}
+
+########################
+# Function: pFunc 
+# Displays only the p-value from a one way annova test of a two column data frame
+# input: Any two column data frame
+# output: The associated p-value for a one way annova test of that data frame.
+# --------------------------------------------------------
+
+pFunc <- function(d = NULL){
+  table = summary(aov(d[[2]] ~ d[[1]], data = d))
+  p <- table[[1]][["Pr(>F)"]][[1]]
+  return(p)
+}
 
 
+########################
+# Function: df_func 
+# creates a 1 column data frame of some length (rows) that fills in each value with a random p-value from the pFunc and dataFCT functions
+# input: a list of numbers from 1:n
+# output: a dataframe with n rows
+# --------------------------------------------------------
 
+df_func <- function(rows = 1:100){
+  df <- data.frame(x = rows)
+  colnames(df) <- "p-values"
+  for(i in rows){
+   df[i, ] <- pFunc(dataFCT())
+  }
+  return(df)
+}
+
+df_func()
 ```
 
 
