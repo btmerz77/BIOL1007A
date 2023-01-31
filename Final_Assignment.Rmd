@@ -1,0 +1,51 @@
+---
+title: "Final Assignment"
+author: "Ben Merz"
+date: "2023-01-31"
+output: 
+  prettydoc::html_pretty:
+  theme: cayman
+  highlight: github
+---
+
+# Assignment
+Download a publicly available data set and reproduce figures and/or an analysis from an article.
+
+# Goal Graphs
+Data set citation: Grzegorczyk, Emilienne et al. (2022), Banding and recovery data on several game bird species to study hunting selectivity, Dryad, Dataset, https://doi.org/10.5061/dryad.8w9ghx3qh
+
+Paper citation: Grzegorczyk, E., Bézier, L., Le-Rest, K., Caizergues, A., Francesiaz, C., Champagnon, J., Guillemain, M., & Eraud, C. (2022). Is hunting nonintentionally selective? A test using game bird capture-dead recoveries. Ecology and Evolution, 12, e9285. https://doi.org/10.1002/ece3.9285
+
+
+![](/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/Final/Grzegorczyk_Fig1.jpeg)
+Fig 1: Predicted values of wing length as a function of year and recovery category in Eurasian teal (Anas crecca).
+
+![](/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/Final/Grzegorczyk_Fig2.jpeg)
+Fig 2: Predicted values of body condition index as a function of recovery category and year (a) or Julian day (b) in Eurasian teal (Anas crecca).
+
+# My Attempt
+```{r}
+## set up libraries
+library(tidyverse)
+library(ggthemes)
+library(patchwork)
+
+# Load data
+birdData <- read.table(file = "/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/Final/data_hunting_selectivity.csv", header = T, sep = ";")
+
+birdData$banding_date <- as.Date(birdData$banding_date)
+birdData$folded_wing <- as.integer(birdData$folded_wing)
+
+glimpse(birdData)
+
+
+
+Fig1 <- ggplot(data = birdData, aes(x = banding_date, y = folded_wing, color = direct_recovery)) +
+  geom_smooth(method = "loess")
+
+print(Fig1)
+  
+
+```
+
+
