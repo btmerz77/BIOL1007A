@@ -9,7 +9,7 @@ output:
 ---
 # Welcome
 <div align="center">
-![](/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Duck.png)
+![](/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/Duck.png)
 
 <div align="left">
 This webpage was built to house this random aquatic avian as well as his portfolio for BIOL 1007: Reproducible Biology in R. This class focuses on learning how to code in R so as to reproducibly analyze and visualize data for biological study. Please  click on the links below at your leisure.
@@ -45,5 +45,5 @@ This webpage was built to house this random aquatic avian as well as his portfol
 
 # Final Assignment
 
-[All Done!!!!](Final_Assignment.html)
+[All Done!!!!](Final_Assignment/Final_Assignment.html)
 

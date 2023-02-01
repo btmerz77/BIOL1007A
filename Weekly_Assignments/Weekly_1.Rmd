@@ -117,7 +117,7 @@ output:
         + Pushs the changes up to GitHub
       + Note
         + Git status should be entered in between steps to make sure everything is proceeding
-         ![](/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/GitD.jpeg) 
+         ![](/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/GitD.jpeg) 
   + Give it a few minutes than go to the link under your pages in setting
     + Your website should be live here, HOOOOORRRRAAAAYYYY!
 
