@@ -19,6 +19,10 @@ Paper citation: Dai, L, Guo, X, Ke, X, et al. Biomass allocation and productivit
 ![](/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/Final/Dai_Fig4.jpeg)
 Figure 4: Relationships between aboveground biomass (AGB) and belowground biomass (BGB) in (a) temperate grassland, (b) desert grassland, (c) meadow steppe, and (d) alpine meadow
 
+![](/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/Final/Dai_Fig6.jpeg)
+Figure 6: Relationships between aboveground biomass (AGB) and species richness across four grassland types
+
+
 # My Attempt
 ```{r message=FALSE, warning=FALSE}
 ## set up libraries
@@ -26,8 +30,9 @@ library(tidyverse)
 library(ggthemes)
 library(patchwork)
 library(ggpmisc)
+library(ggpubr)
 
-# import dowloaded data from dryad
+# import data dowloaded from dryad
 fDataBad <- read.table(file = "/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/Final/Data.csv", sep = ",", header = T)
 
 glimpse(fDataBad)
@@ -38,36 +43,103 @@ glimpse(fDataBad)
 # to formatting problems made in excel
 fDataGood <- read.table(file = "/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/Final/Dai_Data_2.csv", sep = ",", header = T)
 
+# Data is now clean ready to go
+
+# Rename columns
 colnames(fDataGood) <- c("Grassland.Type", "BGB", "AGB", "Species.Richness")
 
 glimpse(fDataGood)
 
+fDataGood$Grassland.Type <- factor(fDataGood$Grassland.Type,
+                                   levels = c("Temperate grassland", "Desert grassland", "Alpine meadow", "Meadow steppe"))
+
+# ADD a new column that is that log of either BGB and AGB
 fDataGood$logBGB <- log(fDataGood$BGB)
 fDataGood$logAGB <- log(fDataGood$AGB)
 
+# subset each data into their respective climate for log graph
 temperate_Data <- subset(fDataGood, Grassland.Type == "Temperate grassland")
-
+desert_Data <- subset(fDataGood, Grassland.Type == "Desert grassland")
+steppe_Data <- subset(fDataGood, Grassland.Type == "Meadow steppe")
+alpine_Data <- subset(fDataGood, Grassland.Type == "Alpine meadow")
 
 
 #####################################
 # Figure 4: Relationships between aboveground biomass (AGB) and belowground biomass (BGB) in (a) temperate grassland, (b) desert grassland, (c) meadow steppe, and (d) alpine meadow
 #------------------------------------
 
-# temperate grassland 
-logAGB_temp <- ggplot(data = temperate_Data, aes(x = logBGB, y = logAGB)) + # aes(x = log(BGB), y = log(AGB))) +
-  geom_point() +
-  stat_ma_line(range.x = 2.4, range.y = 3.8, method = "RMA")
-#  stat_smooth(method = "lm", se = 0.99)
-
-print(logAGB_temp)
-
-
-AGB_temp <- ggplot(data = temperate_Data, aes(x = Species.Richness, y = AGB)) + # aes(x = log(BGB), y = log(AGB))) +
-  geom_point() +
-  stat_smooth(method = "lm") +
+# (a) temperate grassland 
+logAGB_temp <- ggplot(data = temperate_Data, aes(x = logBGB, y = logAGB))  +
+  geom_point(size = 0.5) +
+  # Add line following the RMA method, se = F to get rid of error bars
+  stat_ma_line(size = 0.5, range.x = 2.4, range.y = 3.8, method = "RMA", se = F, color = "black") + 
+  # dd the equation label to the graph, two seperate lines, one for eq and for rr
+  stat_poly_eq(label.x = "centre", label.y = 0.2, aes(label = after_stat(eq.label))) +
+  stat_poly_eq(use_label(c("R2", "P")), label.x = 0.26, label.y = 0.1) +
+  labs(x = NULL, y = "logAGB") + 
   theme_few()
 
-print(AGB_temp)
+# (b) desert grassland
+
+logAGB_des <- ggplot(data = desert_Data, aes(x = logBGB, y = logAGB)) +
+  geom_point(size = 0.5) +
+  stat_ma_line(size = 0.5, range.x = 2.4, range.y = 3.8, method = "RMA", se = F, color = "black") + 
+  stat_poly_eq(label.x = "centre", label.y = 0.2, aes(label = after_stat(eq.label))) +
+  stat_poly_eq(use_label(c("R2", "P")), label.x = 0.26, label.y = 0.1) +
+  labs(x = NULL, y = "logAGB") + 
+  theme_few() 
+
+# (c) meadow step
+
+logAGB_stp <- ggplot(data = steppe_Data, aes(x = logBGB, y = logAGB)) +
+  geom_point(size = 0.5) +
+  stat_ma_line(size = 0.5, range.x = 2.4, range.y = 3.8, method = "RMA", se = F, color = "black") + 
+  stat_poly_eq(label.x = "centre", label.y = 0.2, aes(label = after_stat(eq.label))) +
+  stat_poly_eq(use_label(c("R2", "P")), label.x = 0.26, label.y = 0.1) +
+  labs(x = "logBGB", y = "logAGB") + 
+  theme_few() 
+
+# (d) alpine meadow
+
+logAGB_alp <- ggplot(data = alpine_Data, aes(x = logBGB, y = logAGB)) +
+  geom_point(size = 0.5) +
+  stat_ma_line(size = 0.5, range.x = 2.4, range.y = 3.8, method = "RMA", se = F, color = "black") + 
+  stat_poly_eq(label.x = "centre", label.y = 0.2, aes(label = after_stat(eq.label))) +
+  stat_poly_eq(use_label(c("R2", "P")), label.x = 0.3, label.y = 0.1) +
+  labs(x = "logBGB", y = "logAGB") + 
+  theme_few() 
+
+# Patchwork of all figures combined
+Fig4 <- (logAGB_temp + logAGB_des) / (logAGB_stp + logAGB_alp) + 
+  # add plot labels
+  plot_annotation(tag_levels = list(c("(a)", "(b)", "(c)", "(d)", "(e)"))) &
+  # change the text size and bold them
+  theme(plot.tag = element_text(size = 10, face = 'bold'))
+
+print(Fig4)
+
+
+
+#####################################
+# Figure 6: Relationships between aboveground biomass (AGB) and species richness across four grassland types
+#------------------------------------
+Fig6 <- ggplot(data = fDataGood, aes(x = Species.Richness, y = AGB)) +
+  # Set separate aestehtic for geom_point so that when linear model is taken
+  # it does not take into grassland.type and make 4 different lines
+  geom_point(aes(shape = Grassland.Type)) +
+  stat_poly_line(method = "glm", se = F, color = "black") +
+  # show the labels for R2 and p-value
+  stat_poly_eq(use_label(c("R2", "P"))) +
+  labs(x = "Species richness (N)", y = "AGB (g/m^2)") +
+  ylim(0, 400) +
+  theme_few() +
+  # Set the shapes to match closest to the chosen
+  scale_shape_manual(values=c(15, 16, 17, 8)) +
+  # Set the legend position and remove the title
+  theme(legend.position=c(0.86,0.84),
+        legend.title=element_blank())
+  
+print(Fig6)
 
 ```
 
