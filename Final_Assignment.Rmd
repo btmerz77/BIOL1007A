@@ -17,7 +17,7 @@ Data set citation: Dai, Licong et al. (2020), Biomass allocation and productivit
 Paper citation: Dai, L, Guo, X, Ke, X, et al. Biomass allocation and productivity–richness relationship across four grassland types at the Qinghai Plateau. Ecol Evol. 2020; 10: 506– 516. https://doi.org/10.1002/ece3.5920
 
 ![](/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/Final/Dai_Fig4.jpeg)
-
+Figure 4: Relationships between aboveground biomass (AGB) and belowground biomass (BGB) in (a) temperate grassland, (b) desert grassland, (c) meadow steppe, and (d) alpine meadow
 
 # My Attempt
 ```{r message=FALSE, warning=FALSE}
@@ -25,11 +25,49 @@ Paper citation: Dai, L, Guo, X, Ke, X, et al. Biomass allocation and productivit
 library(tidyverse)
 library(ggthemes)
 library(patchwork)
+library(ggpmisc)
 
-forestData <- read.table(file = "/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/Final/Data.csv", sep = ",", header = T)
+# import dowloaded data from dryad
+fDataBad <- read.table(file = "/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/Final/Data.csv", sep = ",", header = T)
 
-glimpse(forestData)
-  
+glimpse(fDataBad)
+
+# file was an excel sheet converted to a csv
+# manually reorganized columns into long format
+# pivot longer could not due work on the csv file due 
+# to formatting problems made in excel
+fDataGood <- read.table(file = "/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/Final/Dai_Data_2.csv", sep = ",", header = T)
+
+colnames(fDataGood) <- c("Grassland.Type", "BGB", "AGB", "Species.Richness")
+
+glimpse(fDataGood)
+
+fDataGood$logBGB <- log(fDataGood$BGB)
+fDataGood$logAGB <- log(fDataGood$AGB)
+
+temperate_Data <- subset(fDataGood, Grassland.Type == "Temperate grassland")
+
+
+
+#####################################
+# Figure 4: Relationships between aboveground biomass (AGB) and belowground biomass (BGB) in (a) temperate grassland, (b) desert grassland, (c) meadow steppe, and (d) alpine meadow
+#------------------------------------
+
+# temperate grassland 
+logAGB_temp <- ggplot(data = temperate_Data, aes(x = logBGB, y = logAGB)) + # aes(x = log(BGB), y = log(AGB))) +
+  geom_point() +
+  stat_ma_line(range.x = 2.4, range.y = 3.8, method = "RMA")
+#  stat_smooth(method = "lm", se = 0.99)
+
+print(logAGB_temp)
+
+
+AGB_temp <- ggplot(data = temperate_Data, aes(x = Species.Richness, y = AGB)) + # aes(x = log(BGB), y = log(AGB))) +
+  geom_point() +
+  stat_smooth(method = "lm") +
+  theme_few()
+
+print(AGB_temp)
 
 ```
 
