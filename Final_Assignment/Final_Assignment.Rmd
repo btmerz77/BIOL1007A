@@ -12,9 +12,9 @@ output:
 Download a publicly available data set and reproduce figures and/or an analysis from an article.
 
 # Goal Graphs
-Data set citation: Dai, Licong et al. (2020), Biomass allocation and productivity–richness relationship across four grassland types at the Qinghai Plateau, Dryad, Dataset, https://doi.org/10.5061/dryad.j9kd51c7s
+Data set: Dai, Licong et al. (2020), Biomass allocation and productivity–richness relationship across four grassland types at the Qinghai Plateau, Dryad, Dataset, https://doi.org/10.5061/dryad.j9kd51c7s
 
-Paper citation: Dai, L, Guo, X, Ke, X, et al. Biomass allocation and productivity–richness relationship across four grassland types at the Qinghai Plateau. Ecol Evol. 2020; 10: 506– 516. https://doi.org/10.1002/ece3.5920
+Paper: Dai, L, Guo, X, Ke, X, et al. Biomass allocation and productivity–richness relationship across four grassland types at the Qinghai Plateau. Ecol Evol. 2020; 10: 506– 516. https://doi.org/10.1002/ece3.5920
 
 ![](/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/Final/Dai_Fig4.jpeg)
 Figure 4: Relationships between aboveground biomass (AGB) and belowground biomass (BGB) in (a) temperate grassland, (b) desert grassland, (c) meadow steppe, and (d) alpine meadow
@@ -29,8 +29,7 @@ Figure 6: Relationships between aboveground biomass (AGB) and species richness a
 library(tidyverse)
 library(ggthemes)
 library(patchwork)
-library(ggpmisc)
-library(ggpubr)
+library(ggpmisc) # package for specific stat models and easy labeling
 
 # import data dowloaded from dryad
 fDataBad <- read.table(file = "/Users/BenM/Library/Mobile Documents/com~apple~CloudDocs/Documents/College/Bio/Reproducible R/Git Repository/BIOL1007A/Data/Final/Data.csv", sep = ",", header = T)
@@ -48,14 +47,15 @@ fDataGood <- read.table(file = "/Users/BenM/Library/Mobile Documents/com~apple~C
 # Rename columns
 colnames(fDataGood) <- c("Grassland.Type", "BGB", "AGB", "Species.Richness")
 
-glimpse(fDataGood)
-
 fDataGood$Grassland.Type <- factor(fDataGood$Grassland.Type,
                                    levels = c("Temperate grassland", "Desert grassland", "Alpine meadow", "Meadow steppe"))
+# The levels parameter sets the factors in the desired order
 
 # ADD a new column that is that log of either BGB and AGB
 fDataGood$logBGB <- log(fDataGood$BGB)
 fDataGood$logAGB <- log(fDataGood$AGB)
+
+glimpse(fDataGood)
 
 # subset each data into their respective climate for log graph
 temperate_Data <- subset(fDataGood, Grassland.Type == "Temperate grassland")
@@ -72,9 +72,10 @@ alpine_Data <- subset(fDataGood, Grassland.Type == "Alpine meadow")
 logAGB_temp <- ggplot(data = temperate_Data, aes(x = logBGB, y = logAGB))  +
   geom_point(size = 0.5) +
   # Add line following the RMA method, se = F to get rid of error bars
-  stat_ma_line(size = 0.5, range.x = 2.4, range.y = 3.8, method = "RMA", se = F, color = "black") + 
-  # dd the equation label to the graph, two seperate lines, one for eq and for rr
-  stat_poly_eq(label.x = "centre", label.y = 0.2, aes(label = after_stat(eq.label))) +
+  stat_ma_line(size = 0.5, range.x = 2.4, range.y = 3.8, method = "RMA", se = F, color = "black") +
+  # add the equation label to the graph, two seperate lines, one for eq and for rr
+  # default label is eq, but specifct for R^2 and p-value
+  stat_poly_eq( label.x = "centre", label.y = 0.2, aes(label = after_stat(eq.label))) +
   stat_poly_eq(use_label(c("R2", "P")), label.x = 0.26, label.y = 0.1) +
   labs(x = NULL, y = "logAGB") + 
   theme_few()
@@ -83,7 +84,7 @@ logAGB_temp <- ggplot(data = temperate_Data, aes(x = logBGB, y = logAGB))  +
 
 logAGB_des <- ggplot(data = desert_Data, aes(x = logBGB, y = logAGB)) +
   geom_point(size = 0.5) +
-  stat_ma_line(size = 0.5, range.x = 2.4, range.y = 3.8, method = "RMA", se = F, color = "black") + 
+  stat_ma_line(size = 0.5, range.x = 2.4, range.y = 3.8, method = "RMA", se = F, color = "black") +
   stat_poly_eq(label.x = "centre", label.y = 0.2, aes(label = after_stat(eq.label))) +
   stat_poly_eq(use_label(c("R2", "P")), label.x = 0.26, label.y = 0.1) +
   labs(x = NULL, y = "logAGB") + 
@@ -93,7 +94,7 @@ logAGB_des <- ggplot(data = desert_Data, aes(x = logBGB, y = logAGB)) +
 
 logAGB_stp <- ggplot(data = steppe_Data, aes(x = logBGB, y = logAGB)) +
   geom_point(size = 0.5) +
-  stat_ma_line(size = 0.5, range.x = 2.4, range.y = 3.8, method = "RMA", se = F, color = "black") + 
+  stat_ma_line(size = 0.5, range.x = 2.4, range.y = 3.8, method = "RMA", se = F, color = "black") +
   stat_poly_eq(label.x = "centre", label.y = 0.2, aes(label = after_stat(eq.label))) +
   stat_poly_eq(use_label(c("R2", "P")), label.x = 0.26, label.y = 0.1) +
   labs(x = "logBGB", y = "logAGB") + 
@@ -103,7 +104,7 @@ logAGB_stp <- ggplot(data = steppe_Data, aes(x = logBGB, y = logAGB)) +
 
 logAGB_alp <- ggplot(data = alpine_Data, aes(x = logBGB, y = logAGB)) +
   geom_point(size = 0.5) +
-  stat_ma_line(size = 0.5, range.x = 2.4, range.y = 3.8, method = "RMA", se = F, color = "black") + 
+  stat_ma_line(size = 0.5, range.x = 2.4, range.y = 3.8, method = "RMA", se = F, color = "black") +
   stat_poly_eq(label.x = "centre", label.y = 0.2, aes(label = after_stat(eq.label))) +
   stat_poly_eq(use_label(c("R2", "P")), label.x = 0.3, label.y = 0.1) +
   labs(x = "logBGB", y = "logAGB") + 
@@ -124,7 +125,7 @@ print(Fig4)
 # Figure 6: Relationships between aboveground biomass (AGB) and species richness across four grassland types
 #------------------------------------
 Fig6 <- ggplot(data = fDataGood, aes(x = Species.Richness, y = AGB)) +
-  # Set separate aestehtic for geom_point so that when linear model is taken
+  # Set separate aesthetic for geom_point so that when linear model is taken
   # it does not take into grassland.type and make 4 different lines
   geom_point(aes(shape = Grassland.Type)) +
   stat_poly_line(method = "glm", se = F, color = "black") +
@@ -135,7 +136,7 @@ Fig6 <- ggplot(data = fDataGood, aes(x = Species.Richness, y = AGB)) +
   theme_few() +
   # Set the shapes to match closest to the chosen
   scale_shape_manual(values=c(15, 16, 17, 8)) +
-  # Set the legend position and remove the title
+  # Set the legend position and remove the legend title
   theme(legend.position=c(0.86,0.84),
         legend.title=element_blank())
   
