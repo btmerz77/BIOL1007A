@@ -88,6 +88,8 @@ irisFinal <- iris %>%
             ) %>%
   arrange(desc(Mean.Sepal.Area)) # added to clean up table
 
+print(irisFinal)
+
 ```
 
 

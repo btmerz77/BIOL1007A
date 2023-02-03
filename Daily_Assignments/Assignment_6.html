@@ -282,7 +282,14 @@ input and generates irisFinal as the output.</li>
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">Mean.Sepal.Area =</span> <span class="fu">mean</span>(Sepal.Area),</span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">Sample.Size =</span> <span class="fu">n</span>()</span>
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">%&gt;%</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Mean.Sepal.Area)) <span class="co"># added to clean up table</span></span></code></pre></div>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Mean.Sepal.Area)) <span class="co"># added to clean up table</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(irisFinal)</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 5
+##   Species    Mean.Sepal.Length Mean.Sepal.Width Mean.Sepal.Area Sample.Size
+##   &lt;fct&gt;                  &lt;dbl&gt;            &lt;dbl&gt;           &lt;dbl&gt;       &lt;int&gt;
+## 1 virginica               6.79             3.06            20.8          39
+## 2 versicolor              6.48             2.99            19.4          17</code></pre>
 </div>
 </section>
 
