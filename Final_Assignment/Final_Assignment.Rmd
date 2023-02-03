@@ -6,6 +6,8 @@ output:
   prettydoc::html_pretty:
   theme: cayman
   highlight: github
+editor_options: 
+  chunk_output_type: console
 ---
 
 # Assignment
